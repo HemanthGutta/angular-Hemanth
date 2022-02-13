@@ -1,3 +1,5 @@
-import {PhotoRootState} from './photo.reducer';
+import { Photo } from './photo-modal';
 
-export type AppState = PhotoRootState; /* & OtherRootState  & ... */
+export interface AppState {
+  gallery: Photo[];
+}

@@ -1,8 +1,23 @@
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {photoFeatureKey, PhotoRootState, PhotoState} from './photo.reducer';
+import { createSelector } from '@ngrx/store';
+import { Photo } from './photo-modal';
 
-const selectPhotoFeature = createFeatureSelector<PhotoRootState, PhotoState>(photoFeatureKey);
+import { AppState } from './app.state';
 
-export const selectPhotos = createSelector(selectPhotoFeature, state => Object.keys(state).map(key => state[key]));
+export const gallerySelector =(state: AppState) => state.gallery;
 
-export const selectPhoto = createSelector(selectPhotoFeature, (state: PhotoState, props: {id: string}) => state[props.id]);
+export const uniqueAlbumIds = createSelector(
+  gallerySelector,
+  (gallery: Photo[]) => {
+    return [...new Set(gallery.map((_) => _.albumId))];
+  }
+);
+
+export const albumCollectionByAlbumId = (albumId:number) => createSelector(
+    gallerySelector,
+    (gallery:Photo[]) => {
+        if(albumId == -1){
+            return gallery;
+        }
+        return gallery.filter(_ => _.albumId == albumId);
+    }
+)

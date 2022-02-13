@@ -1,7 +1,7 @@
 export interface Photo {
-  id: string;
+  albumId: number;
+  id: number;
   title: string;
   url: string;
-  likes: number;
-  dislikes: number;
+  thumbnailUrl: string;
 }

@@ -1,21 +1,16 @@
-import {createReducer, on} from '@ngrx/store';
-import {loadPhotosSuccess} from './photo.action';
-import {Photo} from './photo-modal';
-export interface PhotoState {
-  [id: string]: Photo;
-}
+import { createReducer, on } from '@ngrx/store';
+import { Photo } from './photo-modal';
+import { retrievedGalleryList } from './photo.action';
 
-export const photoFeatureKey = 'photo';
+export const initialState: ReadonlyArray<Photo> = [];
 
-export interface PhotoRootState {
-  [photoFeatureKey]: PhotoState;
-}
-
-const initialState: PhotoState = {};
-export const photoReducer = createReducer(
+const _galleryReducer = createReducer(
   initialState,
-  on(loadPhotosSuccess, (state, {photos}) => photos.reduce((acc, photo) => ({
-    ...acc,
-    [photo.id]: photo
-  }), {}))
+  on(retrievedGalleryList, (state, { allGallery }) => {
+    return [...allGallery];
+  })
 );
+
+export function galleryReducer(state: any, action: any) {
+  return _galleryReducer(state, action);
+}
