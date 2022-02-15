@@ -21,4 +21,16 @@ export class GalleryEffect {
       )
     )
   );
+
+  loadPost$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType('[Post API] Invoke API'),
+      mergeMap(() =>
+        this.galleryService
+          .loadPost()
+          .pipe(map((data) => ({ type: '[Post API] Post API Success',
+           allPost: data })))
+      )
+    )
+  );
 }

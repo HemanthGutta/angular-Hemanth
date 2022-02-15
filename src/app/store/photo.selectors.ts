@@ -1,9 +1,10 @@
 import { createSelector } from '@ngrx/store';
-import { Photo } from './photo-modal';
+import { Photo, Post } from './photo-modal';
 
-import { AppState } from './app.state';
+import { AppState, AppState1 } from './app.state';
 
 export const gallerySelector =(state: AppState) => state.gallery;
+export const postSelector =(state: AppState1) => state.post;
 
 export const uniqueAlbumIds = createSelector(
   gallerySelector,
@@ -21,3 +22,10 @@ export const albumCollectionByAlbumId = (albumId:number) => createSelector(
         return gallery.filter(_ => _.albumId == albumId);
     }
 )
+
+export const postData = createSelector(
+  postSelector,
+  (post:Post[]) => {
+  return post;
+  }
+) 

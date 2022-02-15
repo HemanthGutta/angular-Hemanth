@@ -9,7 +9,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { GalleryEffect } from './store/photo.effects';
-import { galleryReducer } from './store/photo.reducer';
+import { galleryReducer, postReducer } from './store/photo.reducer';
 import { environment } from '../environments/environment';
 import { PhotoService } from './photo.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
       { path: '', component: ProductListComponent },
     ]),
     EffectsModule.forRoot([GalleryEffect]),
-    StoreModule.forRoot({ gallery: galleryReducer })
+    StoreModule.forRoot({ gallery: galleryReducer,post: postReducer})
   ],
   declarations: [
     AppComponent,

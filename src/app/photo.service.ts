@@ -21,4 +21,9 @@ export class PhotoService {
       .pipe(map((albums) => albums || []));
   }
 
+  loadPost() {
+    return this.http
+      .get('https://jsonplaceholder.typicode.com/posts')
+      .pipe(map((post) => post || []));
+  }
 }
